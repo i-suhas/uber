@@ -1,0 +1,9 @@
+.vs/
+venv/
+uber-surge-predictor/venv/
+uber-surge-predictor/models/model.pkl
+uber-surge-predictor/models/metrics.json
+uber-surge-predictor/data/processed/
+__pycache__/
+*.pyc
+.pytest_cache/

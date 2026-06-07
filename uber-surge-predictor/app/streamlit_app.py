@@ -12,7 +12,16 @@ st.set_page_config(page_title="Uber Surge Predictor", layout="centered")
 
 @st.cache_resource
 def load_model():
+    if not os.path.exists(MODEL_PATH):
+        st.warning("Model file not found. Running training script to generate it...")
+        os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+        from src.train import train
+        train()
+        st.success("Model trained successfully!")
     return joblib.load(MODEL_PATH)
+
+# Pre-load/train model on startup
+load_model()
 
 def predict(demand_vol, active_drivers, lag1, lag2, hour, geohash) -> float:
     ratio = demand_vol / (active_drivers + 1e-6)
@@ -30,14 +39,14 @@ def predict(demand_vol, active_drivers, lag1, lag2, hour, geohash) -> float:
     return float(load_model().predict(df)[0])
 
 # ── UI ────────────────────────────────────────────────────────────────────────
-st.title("Uber Surge Price Predictor")
-st.caption("Predicts surge multiplier directly from the trained model — no API required.")
+st.title("Price Surge Predictor")
+st.caption("Predicts Uber style price surge multiplier directly from the trained model")
 st.divider()
 
 st.subheader("Zone Conditions")
 
 col1, col2 = st.columns(2)
-demand_vol     = col1.number_input("Demand volume",     min_value=10.0, max_value=200.0, value=80.0, step=1.0,
+demand_vol     = col1.number_input("Demand",     min_value=10.0, max_value=200.0, value=80.0, step=1.0,
                                     help="Number of ride requests in the zone right now.")
 active_drivers = col2.number_input("Active drivers",    min_value=1.0,  max_value=100.0, value=30.0, step=1.0,
                                     help="Number of available drivers in the zone right now.")

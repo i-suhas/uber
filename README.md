@@ -2,7 +2,12 @@
 
 A production-style ML system that predicts Uber ride-share surge multipliers using time-series lag features, a scikit-learn pipeline, a FastAPI backend, and a Streamlit frontend.
 
----
+<img width="1509" height="765" alt="Screenshot 2026-06-07 011437" src="https://github.com/user-attachments/assets/0696c736-64cd-4ad7-8a6a-54e7866267f8" />
+
+<img width="1602" height="917" alt="Screenshot 2026-06-07 011525" src="https://github.com/user-attachments/assets/e0987895-b0d1-41a5-9b0f-537e8787f23d" />
+<img width="1023" height="800" alt="Screenshot 2026-06-07 011534" src="https://github.com/user-attachments/assets/ed6d35ef-52aa-425a-a830-4639c0b59852" />
+
+
 
 ## Architecture
 
